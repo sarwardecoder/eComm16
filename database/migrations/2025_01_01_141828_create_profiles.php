@@ -11,11 +11,14 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('profiles', function (Blueprint $table) {
-            $table->string('fName', 30)->unique();
-            $table->string('lName', 30)->unique();
-            $table->string('mobile', 30)->unique();
-            $table->string('shippingAddress', 30)->unique();
-            $table->string('email', 30)->unique();
+            $table->string('firstName', 50);
+            $table->string('lastName', 50);
+            $table->string('mobile', 50);
+            $table->string('shippingAddress', 50);
+            $table->string('profile_email', 30)->unique();
+            //relationship with users table
+            $table->foreign('profile_email', 30)->references('email')->on('users')->restrictOnDelete()->cascadeOnUpdate();
+
             $table->timestamps()->useCurrent();
             $table->timestamps()->useCurrent()->useCurrentOnUpdate();
         });

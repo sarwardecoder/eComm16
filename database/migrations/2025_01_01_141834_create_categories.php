@@ -11,10 +11,11 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('categories', function (Blueprint $table) {
+            $table->id();
             $table->string('categoryName', 50);
             $table->string('categoryImg', 300);
-            $table->timestamps()->useCurrent();
-            $table->timestamps()->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

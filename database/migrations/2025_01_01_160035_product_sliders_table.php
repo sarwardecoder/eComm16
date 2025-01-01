@@ -5,22 +5,20 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('product_reviews', function (Blueprint $table) {
+        Schema::create('product_sliders_table', function (Blueprint $table) {
             $table->id();
-            $table->string('description', 1000);
+            $table->string('title', 200);
+            $table->string('short_des', 500);
+            $table->string('image', 200);
 
             //foreign key
-            $table->string('profile_email', 50);
-            $table->unsignedBigInteger('product_id');
-            //relation with profiles
-            $table->foreign('profile_email')->references('profile_email')->on('profiles')->restrictOnDelete()->cascadeOnUpdate();
+            $table->unsignedBigInteger('product_id')->unique();
+
             //Relation with Products
             $table->foreign('product_id')->references('id')->on('products')->restrictOnDelete()->cascadeOnUpdate();
+
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
@@ -31,6 +29,10 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_reviews');
+        Schema::dropIfExists('product_sliders_table');
     }
 };
+
+
+
+

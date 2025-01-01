@@ -14,13 +14,14 @@ return new class extends Migration {
             $table->string('firstName', 50);
             $table->string('lastName', 50);
             $table->string('mobile', 50);
-            $table->string('shippingAddress', 50);
+            $table->string('shippingAddress', 100);
+            //foreign key
             $table->string('profile_email', 30)->unique();
             //relationship with users table
             $table->foreign('profile_email', 30)->references('email')->on('users')->restrictOnDelete()->cascadeOnUpdate();
 
-            $table->timestamps()->useCurrent();
-            $table->timestamps()->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 
